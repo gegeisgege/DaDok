@@ -251,14 +251,14 @@ dadok/
 │   │   ├── Report.jsx
 │   │   └── Privacy.jsx
 │   ├── charts/
-│   │   └── PlotlyVisualizations.jsx
+│   │   └── PlotlyVisualisations.jsx
 │   └── services/
 │       └── api.js
 │
 ├── backend/
 │   ├── api/
 │   │   ├── upload.py
-│   │   ├── analyze.py
+│   │   ├── analyse.py
 │   │   └── clean.py
 │   ├── processing/
 │   │   ├── profiler.py
