@@ -19,6 +19,48 @@ Data scientists spend 60-80% of their time cleaning and inspecting datasets befo
 
 ---
 
+## 📊 Development Progress
+
+### ✅ Phase 1: MVP - In Progress
+
+**Frontend (React + Vite + TailwindCSS)**
+- ✅ Project structure setup
+- ✅ PrivacyPopup component (first-visit consent modal)
+- ✅ UploadZone component (drag-and-drop with validation)
+- ✅ Dashboard page (main landing page)
+- ✅ API service layer (ready for backend integration)
+- ✅ React Router setup
+- ⏳ Report page (analysis results display)
+- ⏳ Privacy page (privacy policy)
+- ⏳ HealthScoreCard component
+- ⏳ CleaningPreview component
+- ⏳ PlotlyVisualisations component
+
+**Backend (FastAPI + Pandas)**
+- ⏳ FastAPI setup
+- ⏳ Upload endpoint (`/api/upload`)
+- ⏳ Analysis endpoint (`/api/analyze`)
+- ⏳ Report endpoint (`/api/report/{dataset_id}`)
+- ⏳ Cleaning endpoint (`/api/clean`)
+- ⏳ Download endpoint (`/api/download/{dataset_id}`)
+- ⏳ Dataset profiler
+- ⏳ Validator
+- ⏳ Cleaner
+
+**Database**
+- ⏳ PostgreSQL setup (Supabase)
+- ⏳ Schema migrations
+- ⏳ Models
+
+**Algorithms**
+- ⏳ Outlier detection
+- ⏳ Type inference
+- ⏳ Fuzzy matching
+
+**Legend:** ✅ Complete | ⏳ In Progress | ⬜ Not Started
+
+---
+
 ## ✨ Core Features
 
 ### 📤 Dataset Upload
@@ -149,22 +191,24 @@ Download in multiple formats:
 
 ### Tech Stack
 
+**Frontend:**
+- Framework: React 18
+- Build Tool: Vite
+- Styling: TailwindCSS
+- Routing: React Router v6
+- Charts: Plotly.js + React-Plotly.js
+- Deployment: Vercel (free tier)
+
 **Backend:**
-- Language: Python
+- Language: Python 3.11+
 - Framework: FastAPI
 - Data Processing: Pandas, Polars
 - Validation: Pandera
 - Statistics: NumPy, SciPy
 
-**Frontend:**
-- Framework: React
-- Styling: TailwindCSS
-- Charts: Plotly
-- Deployment: Vercel (free tier)
-
 **Infrastructure:**
 - Backend Hosting: Render (free tier)
-- Database: Supabase (free tier)
+- Database: Supabase (PostgreSQL, free tier)
 - CI/CD: GitHub Actions
 - File Storage: Temporary local disk
 
@@ -226,13 +270,13 @@ User Upload → Temporary Storage → Analysis → Report Generation → AUTO-DE
 
 ### Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/upload` | Upload dataset for analysis |
-| POST | `/api/analyze` | Run quality diagnostics |
-| GET | `/api/report/{dataset_id}` | Retrieve analysis report |
-| POST | `/api/clean` | Execute cleaning operations |
-| GET | `/api/download/{dataset_id}` | Download cleaned dataset |
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|--------|
+| POST | `/api/upload` | Upload dataset for analysis | ⏳ |
+| POST | `/api/analyze` | Run quality diagnostics | ⏳ |
+| GET | `/api/report/{dataset_id}` | Retrieve analysis report | ⏳ |
+| POST | `/api/clean` | Execute cleaning operations | ⏳ |
+| GET | `/api/download/{dataset_id}` | Download cleaned dataset | ⏳ |
 
 ---
 
@@ -241,48 +285,59 @@ User Upload → Temporary Storage → Analysis → Report Generation → AUTO-DE
 ```
 dadok/
 ├── frontend/
-│   ├── components/
-│   │   ├── UploadZone.jsx
-│   │   ├── HealthScoreCard.jsx
-│   │   ├── PrivacyPopup.jsx
-│   │   └── CleaningPreview.jsx
-│   ├── pages/
-│   │   ├── Dashboard.jsx
-│   │   ├── Report.jsx
-│   │   └── Privacy.jsx
 │   ├── charts/
-│   │   └── PlotlyVisualisations.jsx
-│   └── services/
-│       └── api.js
+│   │   └── PlotlyVisualisations.jsx        ⏳
+│   ├── node_modules/
+│   ├── components/
+│   │   ├── CleaningPreview.jsx             ⏳
+│   │   ├── HealthScoreCard.jsx             ⏳
+│   │   ├── PrivacyPopup.jsx                ✅
+│   │   └── UploadZone.jsx                  ✅
+│   ├── pages/
+│   │   ├── Dashboard.jsx                   ✅
+│   │   ├── Privacy.jsx                     ✅
+│   │   └── Report.jsx                      ✅
+│   ├── services/
+│   │   └── api.js                          ✅
+│   ├── src/
+│   │   ├── App.jsx                         ✅
+│   │   └── index.css                       ✅
+│   │   └── main.jsx                       ✅
+│   ├── .env                                ✅
+│   ├── package-lock.json                   ✅
+│   ├── package.json                        ✅
+│   ├── postcss.config.js                   ✅
+│   ├── tailwind.config.js                  ✅
+│   └── vite.config.js                      ✅
 │
 ├── backend/
 │   ├── api/
-│   │   ├── upload.py
-│   │   ├── analyse.py
-│   │   └── clean.py
+│   │   ├── upload.py                       ⏳
+│   │   ├── analyse.py                      ⏳
+│   │   └── clean.py                        ⏳
 │   ├── processing/
-│   │   ├── profiler.py
-│   │   ├── validator.py
-│   │   └── cleaner.py
+│   │   ├── profiler.py                     ⏳
+│   │   ├── validator.py                    ⏳
+│   │   └── cleaner.py                      ⏳
 │   ├── algorithms/
-│   │   ├── outlier_detection.py
-│   │   ├── type_inference.py
-│   │   └── fuzzy_matching.py
+│   │   ├── outlier_detection.py            ⏳
+│   │   ├── type_inference.py               ⏳
+│   │   └── fuzzy_matching.py               ⏳
 │   └── validation/
-│       └── schema_validator.py
+│       └── schema_validator.py             ⏳
 │
 ├── database/
 │   └── migrations/
-│       └── init_schema.sql
+│       └── init_schema.sql                 ⏳
 │
 ├── pipelines/
-│   ├── profiling/
-│   ├── anomaly_detection/
-│   └── cleaning/
+│   ├── profiling/                          ⏳
+│   ├── anomaly_detection/                  ⏳
+│   └── cleaning/                           ⏳
 │
 └── docs/
-    ├── architecture.md
-    └── algorithms.md
+    ├── architecture.md                     ⏳
+    └── algorithms.md                       ⏳
 ```
 
 ---
@@ -297,6 +352,8 @@ dadok/
 3. Build frontend
 4. Deploy backend to Render
 5. Deploy frontend to Vercel
+
+**Status:** ⏳ Not yet configured
 
 ---
 
@@ -321,42 +378,72 @@ dadok/
 
 ## 🛣️ Development Roadmap
 
-### Phase 1: MVP
-- [ ] Dataset upload and profiling
-- [ ] Basic quality diagnostics
-- [ ] Health score calculation
-- [ ] Simple cleaning operations
+### Phase 1: MVP ⏳ IN PROGRESS
+- ✅ Frontend structure setup
+- ✅ Upload zone with validation
+- ✅ Privacy popup
+- ✅ Dashboard page
+- ⏳ Report page
+- ⏳ Dataset upload backend endpoint
+- ⏳ Basic quality diagnostics
+- ⏳ Health score calculation
+- ⏳ Simple cleaning operations
 
 ### Phase 2: Advanced Features
-- [ ] Interactive visualizations
-- [ ] Fuzzy category matching
-- [ ] Multiple imputation strategies
-- [ ] Before/after comparison
+- ⬜ Interactive visualizations
+- ⬜ Fuzzy category matching
+- ⬜ Multiple imputation strategies
+- ⬜ Before/after comparison
 
 ### Phase 3: Scale
-- [ ] Support for larger datasets (chunked processing)
-- [ ] API rate limiting
-- [ ] Advanced anomaly detection
-- [ ] Custom cleaning rules
+- ⬜ Support for larger datasets (chunked processing)
+- ⬜ API rate limiting
+- ⬜ Advanced anomaly detection
+- ⬜ Custom cleaning rules
 
 ### Phase 4: Intelligence
-- [ ] ML-based type inference
-- [ ] Predictive data quality scoring
-- [ ] Automated cleaning recommendations
-- [ ] Dataset insights engine
+- ⬜ ML-based type inference
+- ⬜ Predictive data quality scoring
+- ⬜ Automated cleaning recommendations
+- ⬜ Dataset insights engine
 
 ---
 
 ## 🌐 Deployment (Zero Cost)
 
-| Service | Platform | Tier |
-|---------|----------|------|
-| Frontend | Vercel | Free |
-| Backend | Render | Free |
-| Database | Supabase | Free |
-| CI/CD | GitHub Actions | Free |
+| Service | Platform | Tier | Status |
+|---------|----------|------|--------|
+| Frontend | Vercel | Free | ⏳ Not deployed |
+| Backend | Render | Free | ⏳ Not deployed |
+| Database | Supabase | Free | ⏳ Not configured |
+| CI/CD | GitHub Actions | Free | ⏳ Not configured |
 
 **Total monthly cost:** $0
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ (for frontend)
+- Python 3.11+ (for backend)
+- Git
+
+### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
 ---
 
@@ -377,6 +464,26 @@ MIT License — Free to use, modify, and distribute.
 **Dadok** (Dataset Doktor) — Your dataset's doctor for automated diagnostics and repair.
 
 Built with ❤️ for the data community.
+
+---
+
+## 📝 Development Notes
+
+### Current Session Progress (Latest)
+- ✅ Created frontend structure
+- ✅ Implemented PrivacyPopup component with localStorage consent tracking
+- ✅ Implemented UploadZone component with drag-and-drop, file validation (CSV/XLSX/JSON, 50MB max)
+- ✅ Created Dashboard page with hero section, features showcase, and "How It Works" section
+- ✅ Set up API service layer ready for backend integration
+- ✅ Configured Vite, TailwindCSS, React Router
+
+### Next Steps
+1. Create Report.jsx page to display analysis results
+2. Create HealthScoreCard.jsx component
+3. Create CleaningPreview.jsx component
+4. Create PlotlyVisualisations.jsx for charts
+5. Create Privacy.jsx page
+6. Start backend development (FastAPI setup, upload endpoint)
 
 ---
 
