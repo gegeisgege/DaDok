@@ -24,14 +24,14 @@ Data scientists spend 60-80% of their time cleaning and inspecting datasets befo
 ### ✅ Phase 1: MVP - In Progress
 
 **Frontend (React + Vite + TailwindCSS)**
-- ✅ Project structure setup
+- ✅ Project structure setup with proper Tailwind configuration
 - ✅ PrivacyPopup component (first-visit consent modal)
 - ✅ UploadZone component (drag-and-drop with validation)
 - ✅ Dashboard page (main landing page)
+- ✅ Privacy page (privacy policy)
+- ✅ Report page (analysis results display - skeleton)
 - ✅ API service layer (ready for backend integration)
 - ✅ React Router setup
-- ⏳ Report page (analysis results display)
-- ⏳ Privacy page (privacy policy)
 - ⏳ HealthScoreCard component
 - ⏳ CleaningPreview component
 - ⏳ PlotlyVisualisations component
@@ -246,24 +246,6 @@ User Upload → Temporary Storage → Analysis → Report Generation → AUTO-DE
 **Rejected:** EXE, ZIP, PDF, scripts, binaries  
 **Validation:** MIME type verification
 
-### Privacy Popup (Required on First Visit)
-
-```
-┌─────────────────────────────────────────────────┐
-│          🔒 Data Privacy Notice                 │
-│                                                 │
-│  Dadok processes datasets temporarily to        │
-│  generate quality reports. Your data will:      │
-│                                                 │
-│  ✅ NOT be stored permanently                   │
-│  ✅ NOT be shared with third parties            │
-│  ✅ NOT be used for training                    │
-│  ✅ Be automatically deleted after analysis     │
-│                                                 │
-│  [ Agree and Continue ]  [ Leave Site ]        │
-└─────────────────────────────────────────────────┘
-```
-
 ---
 
 ## 🚀 API Design
@@ -287,7 +269,6 @@ dadok/
 ├── frontend/
 │   ├── charts/
 │   │   └── PlotlyVisualisations.jsx        ⏳
-│   ├── node_modules/
 │   ├── components/
 │   │   ├── CleaningPreview.jsx             ⏳
 │   │   ├── HealthScoreCard.jsx             ⏳
@@ -301,11 +282,10 @@ dadok/
 │   │   └── api.js                          ✅
 │   ├── src/
 │   │   ├── App.jsx                         ✅
-│   │   └── index.css                       ✅
+│   │   ├── index.css                       ✅
 │   │   └── main.jsx                        ✅
-│   ├── .env                                ✅
-│   ├── package-lock.json                   ✅
-│   ├── package.json                        ✅
+│   ├── .env
+│   ├── package.json
 │   ├── postcss.config.js                   ✅
 │   ├── tailwind.config.js                  ✅
 │   └── vite.config.js                      ✅
@@ -330,11 +310,6 @@ dadok/
 │   └── migrations/
 │       └── init_schema.sql                 ⏳
 │
-├── pipelines/
-│   ├── profiling/                          ⏳
-│   ├── anomaly_detection/                  ⏳
-│   └── cleaning/                           ⏳
-│
 └── docs/
     ├── architecture.md                     ⏳
     └── algorithms.md                       ⏳
@@ -342,26 +317,59 @@ dadok/
 
 ---
 
-## 🔄 CI/CD Pipeline
+## 🚀 Getting Started
 
-**Triggers:** Push to `main` branch
+### Prerequisites
+- Node.js 18+ (for frontend)
+- Python 3.11+ (for backend)
+- Git
 
-**Steps:**
-1. Install dependencies
-2. Run tests
-3. Build frontend
-4. Deploy backend to Render
-5. Deploy frontend to Vercel
+### Frontend Setup
 
-**Status:** ⏳ Not yet configured
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
----
+**Important:** If styles don't appear after first run, ensure your `tailwind.config.js` includes:
 
-## ⚡ Performance
+```javascript
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",      // Components outside src/
+    "./components/**/*.{js,ts,jsx,tsx}", // Components outside src/
+  ],
+  // ... rest of config
+}
+```
 
-- **Chunked processing:** Large datasets processed in 50,000-row chunks
-- **Async operations:** Non-blocking analysis pipeline
-- **In-memory processing:** Reduces disk I/O when possible
+And your `postcss.config.js` has:
+
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+After making config changes:
+1. Stop the dev server (Ctrl+C)
+2. Restart: `npm run dev`
+3. Hard refresh browser: Ctrl+Shift+R
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
 ---
 
@@ -379,11 +387,11 @@ dadok/
 ## 🛣️ Development Roadmap
 
 ### Phase 1: MVP ⏳ IN PROGRESS
-- ✅ Frontend structure setup
-- ✅ Upload zone with validation
-- ✅ Privacy popup
-- ✅ Dashboard page
-- ⏳ Report page
+- ✅ Frontend structure setup with Tailwind CSS properly configured
+- ✅ Upload zone with drag-and-drop validation
+- ✅ Privacy popup with consent tracking
+- ✅ Dashboard page with hero section and feature showcase
+- ✅ Privacy and Report page skeletons
 - ⏳ Dataset upload backend endpoint
 - ⏳ Basic quality diagnostics
 - ⏳ Health score calculation
@@ -422,31 +430,6 @@ dadok/
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ (for frontend)
-- Python 3.11+ (for backend)
-- Git
-
-### Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Backend Setup
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
----
-
 ## 🤝 Contributing
 
 Contributions welcome! Please read our contributing guidelines before submitting PRs.
@@ -469,23 +452,30 @@ Built with ❤️ for the data community.
 
 ## 📝 Development Notes
 
-### Current Session Progress (Latest)
-- ✅ Created frontend structure
+### Latest Session Progress
+- ✅ Created frontend structure with React + Vite + TailwindCSS
 - ✅ Implemented PrivacyPopup component with localStorage consent tracking
 - ✅ Implemented UploadZone component with drag-and-drop, file validation (CSV/XLSX/JSON, 50MB max)
 - ✅ Created Dashboard page with hero section, features showcase, and "How It Works" section
 - ✅ Set up API service layer ready for backend integration
-- ✅ Configured Vite, TailwindCSS, React Router
-- ✅ added main.jsx, added code in PrivacyPopUp, Report, Privacy.jsx
-- ✅ NPM run dev runs on localhost:3000 but it looks terrible the frontend
+- ✅ Configured React Router with Dashboard, Report, and Privacy pages
+- ✅ **Fixed Tailwind CSS not applying:** Updated `tailwind.config.js` to scan components outside `/src/` folder
+- ✅ **Fixed PostCSS:** Configured `postcss.config.js` with tailwindcss and autoprefixer plugins
+- ✅ Frontend now renders properly with all styles applied
+
+### Troubleshooting Note
+If Tailwind styles don't appear, check that:
+1. `tailwind.config.js` content array includes paths to ALL component folders (not just `/src/`)
+2. `postcss.config.js` includes tailwindcss and autoprefixer plugins
+3. Dev server is restarted after config changes
+4. Browser is hard-refreshed (Ctrl+Shift+R)
 
 ### Next Steps
-1. Create Report.jsx page to display analysis results
-2. Create HealthScoreCard.jsx component
-3. Create CleaningPreview.jsx component
-4. Create PlotlyVisualisations.jsx for charts
-5. Create Privacy.jsx page
-6. Start backend development (FastAPI setup, upload endpoint)
+1. Create HealthScoreCard.jsx component
+2. Create CleaningPreview.jsx component
+3. Create PlotlyVisualisations.jsx for charts
+4. Flesh out Report.jsx page with actual analysis display
+5. Start backend development (FastAPI setup, upload endpoint)
 
 ---
 
